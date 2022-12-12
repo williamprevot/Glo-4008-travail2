@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DH_USERNAME=$1
-DH_PASSWORD=$2
+DH_USERNAME=
+DH_PASSWORD=
 
 if [ -z "$DH_USERNAME" ] || [ -z "$DH_PASSWORD" ]
 then
