@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sqlite-pvc
+spec:
+  storageClassName: pv-scn
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Mi
