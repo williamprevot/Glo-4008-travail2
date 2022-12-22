@@ -3,17 +3,19 @@ kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2022-12-12T21:52:52Z"
-  generation: 1
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1"},"creationTimestamp":"2022-12-12T21:52:52Z","generation":1,"labels":{"app":"feedback-api"},"name":"feedback-api","namespace":"default","resourceVersion":"3363","uid":"67d13c7e-bfe6-4e7c-95f0-2c682e5e3109"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"feedback-api"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"feedback-api"}},"spec":{"containers":[{"image":"walidelass/feedback-api:submission","imagePullPolicy":"IfNotPresent","name":"feedback-api","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}},"status":{"conditions":[{"lastTransitionTime":"2022-12-12T21:52:52Z","lastUpdateTime":"2022-12-12T21:53:11Z","message":"ReplicaSet \"feedback-api-85d7d6565\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"},{"lastTransitionTime":"2022-12-12T21:54:57Z","lastUpdateTime":"2022-12-12T21:54:57Z","message":"Deployment does not have minimum availability.","reason":"MinimumReplicasUnavailable","status":"False","type":"Available"}],"observedGeneration":1,"replicas":1,"unavailableReplicas":1,"updatedReplicas":1}}
+  creationTimestamp: "2022-12-22T18:46:24Z"
+  generation: 2
   labels:
     app: feedback-api
   name: feedback-api
   namespace: default
-  resourceVersion: "3363"
-  uid: 67d13c7e-bfe6-4e7c-95f0-2c682e5e3109
+  resourceVersion: "360113"
+  uid: 67df1f99-4462-449c-bed9-c6c4083b5762
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -33,6 +35,12 @@ spec:
       - image: walidelass/feedback-api:submission
         imagePullPolicy: IfNotPresent
         name: feedback-api
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 30
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
@@ -43,19 +51,19 @@ spec:
       terminationGracePeriodSeconds: 30
 status:
   conditions:
-  - lastTransitionTime: "2022-12-12T21:52:52Z"
-    lastUpdateTime: "2022-12-12T21:53:11Z"
+  - lastTransitionTime: "2022-12-22T18:46:24Z"
+    lastUpdateTime: "2022-12-22T18:46:52Z"
     message: ReplicaSet "feedback-api-85d7d6565" has successfully progressed.
     reason: NewReplicaSetAvailable
     status: "True"
     type: Progressing
-  - lastTransitionTime: "2022-12-12T21:54:57Z"
-    lastUpdateTime: "2022-12-12T21:54:57Z"
+  - lastTransitionTime: "2022-12-22T18:58:04Z"
+    lastUpdateTime: "2022-12-22T18:58:04Z"
     message: Deployment does not have minimum availability.
     reason: MinimumReplicasUnavailable
     status: "False"
     type: Available
-  observedGeneration: 1
-  replicas: 1
-  unavailableReplicas: 1
-  updatedReplicas: 1
+  observedGeneration: 2
+  replicas: 2
+  unavailableReplicas: 2
+  updatedReplicas: 2
