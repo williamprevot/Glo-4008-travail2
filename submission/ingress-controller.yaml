@@ -64,4 +64,4 @@ spec:
           service:
             name: feedback-api-svc
             port:
-              number: 90000
+              number: 9000
