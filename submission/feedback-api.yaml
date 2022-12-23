@@ -48,15 +48,6 @@ spec:
         - containerPort: 80
           name: feedback-api
           protocol: TCP
-        resources:
-          limits:
-            cpu: 130m
-            memory: 172Mi
-          requests:
-            cpu: 130m
-            memory: 172Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /app/Database/
           name: db-data
