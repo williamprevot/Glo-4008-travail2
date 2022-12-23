@@ -27,7 +27,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: feedback-api
     spec:
@@ -70,22 +69,18 @@ spec:
       - name: db-data
         persistentVolumeClaim:
           claimName: sqlite-pvc
-status:
-  availableReplicas: 2
-  conditions:
-  - lastTransitionTime: "2022-12-22T22:20:45Z"
-    lastUpdateTime: "2022-12-22T22:20:45Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2022-12-22T22:20:42Z"
-    lastUpdateTime: "2022-12-22T22:20:45Z"
-    message: ReplicaSet "feedback-api-68d8967466" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 1
-  readyReplicas: 2
-  replicas: 2
-  updatedReplicas: 2
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: feedback-api-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: api-gateway
+  ports:
+  - name: http
+    port: 9000
+    targetPort: 80
