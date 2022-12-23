@@ -52,25 +52,6 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 2
-  conditions:
-  - lastTransitionTime: "2022-12-22T18:46:24Z"
-    lastUpdateTime: "2022-12-22T18:46:25Z"
-    message: ReplicaSet "logic-api-677f8784c4" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  - lastTransitionTime: "2022-12-22T19:01:47Z"
-    lastUpdateTime: "2022-12-22T19:01:47Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  observedGeneration: 2
-  readyReplicas: 2
-  replicas: 2
-  updatedReplicas: 2
 
 ---
 

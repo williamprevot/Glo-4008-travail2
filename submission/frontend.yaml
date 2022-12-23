@@ -44,25 +44,6 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2022-12-12T21:52:47Z"
-    lastUpdateTime: "2022-12-12T21:52:47Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2022-12-12T21:52:39Z"
-    lastUpdateTime: "2022-12-12T21:52:47Z"
-    message: ReplicaSet "frontend-5d5956f48c" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 1
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1
 
 ---
 

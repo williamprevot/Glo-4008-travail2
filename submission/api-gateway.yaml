@@ -58,24 +58,6 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  conditions:
-  - lastTransitionTime: "2022-12-22T18:46:24Z"
-    lastUpdateTime: "2022-12-22T18:46:48Z"
-    message: ReplicaSet "api-gateway-5fd4974598" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  - lastTransitionTime: "2022-12-22T18:58:08Z"
-    lastUpdateTime: "2022-12-22T18:58:08Z"
-    message: Deployment does not have minimum availability.
-    reason: MinimumReplicasUnavailable
-    status: "False"
-    type: Available
-  observedGeneration: 2
-  replicas: 2
-  unavailableReplicas: 2
-  updatedReplicas: 2
 
 ---
 
