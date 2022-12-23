@@ -1,67 +1,69 @@
-# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+## https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+#
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: frontend-ingress
+#  namespace: default
+#  annotations:
+#    kubernetes.io/ingress.class: "nginx"
+#    nginx.ingress.kubernetes.io/add-base-url: "true"
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: frontend-svc
+#            port:
+#              number: 80
+#
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: microservice-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - http:
-      paths: 
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend-svc
-            port:
-              number: 80
-      
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: api-gateway-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-  - http:
-      paths: 
-      - path: /api(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: api-gateway-svc
-            port:
-              number: 8080
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: feedback-api-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-  - http:
-      paths: 
-      - path: /admin(/|$)(.*)
-        pathType: Prefix
-        backend:
-          service:
-            name: feedback-api-svc
-            port:
-              number: 9000
+#---
+#
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: api-gateway-ingress
+#  namespace: default
+#  annotations:
+#    kubernetes.io/ingress.class: "nginx"
+#    nginx.ingress.kubernetes.io/add-base-url: "true"
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /api(/|$)(.*)
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: api-gateway-svc
+#            port:
+#              number: 8080
+#
+#---
+#
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: feedback-api-ingress
+#  namespace: default
+#  annotations:
+#    kubernetes.io/ingress.class: "nginx"
+#    nginx.ingress.kubernetes.io/add-base-url: "true"
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#      - path: /admin(/|$)(.*)
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: feedback-api-svc
+#            port:
+#              number: 9000
