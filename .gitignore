@@ -5,6 +5,7 @@ node_modules/
 **/frontend/build/
 venv/
 target/
+.vscode/
 .mvn/
 !**/maven-wrapper.jar
 **/.idea/

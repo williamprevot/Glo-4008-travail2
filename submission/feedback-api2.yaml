@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  feedback-api
+  namespace: default
+  labels:
+    app:  feedback-api
+spec:
+  selector:
+    matchLabels:
+      app: feedback-api
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: feedback-api
+    spec:
+      containers:
+      - name: feedback-api
+        image: walidelass/feedback-api:submission
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 30
+        ports:
+        - containerPort:  80
+          name:  feedback-api
+        volumeMounts:
+        - name: db-data
+          mountPath: /app/Database/
+      volumes:
+      - name: db-data
+        persistentVolumeClaim:
+          claimName: sqlite-pvc
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: feedback-api
+spec:
+  type: ClusterIP
+  selector:
+    app: api-gateway
+  ports:
+  - name: http
+    port: 9000
+    targetPort: 80

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  logic-api
+  namespace: default
+  labels:
+    app:  logic-api
+spec:
+  selector:
+    matchLabels:
+      app: logic-api
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: logic-api
+    spec:
+      containers:
+      - name: logic-api
+        image: walidelass/logic-api:submission
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 30
+        ports:
+        - containerPort: 5000
+          name: logic-api
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: logic-api
+spec:
+  type: ClusterIP
+  selector:
+    app: logic-api
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000
