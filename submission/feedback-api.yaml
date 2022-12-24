@@ -53,7 +53,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: feedback-api
+  name: feedback-api-svc
 spec:
   type: ClusterIP
   selector:

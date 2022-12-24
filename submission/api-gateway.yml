@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  logic-api
+  name:  api-gateway
   namespace: default
   labels:
-    app:  logic-api
+    app:  api-gateway
 spec:
   selector:
     matchLabels:
-      app: logic-api
+      app: api-gateway
   replicas: 2
   strategy:
     rollingUpdate:
@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        app: logic-api
+        app: api-gateway
     spec:
       containers:
-      - name: logic-api
-        image: walidelass/logic-api:submission
+      - name: api-gateway
+        image: walidelass/api-gateway:submission
         resources:
           requests:
             cpu: 100m
@@ -33,12 +33,19 @@ spec:
         livenessProbe:
           httpGet:
             path: /health
-            port: 5000
+            port: 8080
           initialDelaySeconds: 5
           periodSeconds: 30
+        env:
+        - name:  LOGIC_API_URL
+          value: http://logic-api:5000/
+        - name:  FEEDBACK_API_URL
+          value: http://feedback-api:9000/
+        - name: SERVER_PORT
+          value: '8080'
         ports:
-        - containerPort: 5000
-          name: logic-api
+        - containerPort: 8080
+          name:  api-gateway
       restartPolicy: Always
 
 ---
@@ -46,12 +53,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: logic-api
+  name: api-gateway
 spec:
   type: ClusterIP
   selector:
-    app: logic-api
+    app: api-gateway-svc
   ports:
   - name: http
-    port: 5000
-    targetPort: 5000
+    port: 8080
+    targetPort: 8080

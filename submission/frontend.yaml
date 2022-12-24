@@ -44,7 +44,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: frontend
+    app: frontend-svc
   ports:
   - name: http
     port: 80
