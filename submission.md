@@ -7,10 +7,10 @@
 ### NIP: 536 903 801
 
 ### Nom complet: ROBLES ZAMBRANO Deivi Jesus
-### NIP: 
+### NIP: 536 941 796
 
 ### Nom complet: PREVOT William
-### NIP:
+### NIP: 537 015 481
 
 ### Liste des codes et descriptions des fonctionnalités sélectionnées:
 
