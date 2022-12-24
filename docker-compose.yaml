@@ -39,6 +39,6 @@ services:
     ports:
     - "9000:5001"
     environment:
-    - DATABASE_DIR=/usr/db
+    - DATABASE_DIR=./
     volumes:
-    - "./feedback-api/Database:/usr/db"
+    - "./feedback-api/Database:/Database"
