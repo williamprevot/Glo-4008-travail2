@@ -26,7 +26,7 @@ spec:
             name: api-gateway-svc
             port:
               number: 8080
-              
+
       - path: /admin(/|$)(.*)
         pathType: Prefix
         backend:
@@ -34,3 +34,12 @@ spec:
             name: feedback-api-svc
             port:
               number: 9000
+
+      - path: /analyze/sentence
+        pathType: Prefix
+        backend:
+          service:
+            name: logic-api-svc
+            port:
+              number: 5000
+
