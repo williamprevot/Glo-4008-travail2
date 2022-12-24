@@ -18,7 +18,8 @@ spec:
             name: frontend-svcS
             port:
               number: 80
-
+  - http:
+      paths: 
       - path: /api(/|$)(.*)
         pathType: Prefix
         backend:
@@ -26,7 +27,8 @@ spec:
             name: api-gateway-svc
             port:
               number: 8080
-
+  - http:
+      paths: 
       - path: /admin(/|$)(.*)
         pathType: Prefix
         backend:
@@ -34,7 +36,8 @@ spec:
             name: feedback-api-svc
             port:
               number: 9000
-
+  - http:
+      paths: 
       - path: /analyze/sentence
         pathType: Prefix
         backend:
