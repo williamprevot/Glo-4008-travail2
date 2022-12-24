@@ -15,25 +15,10 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: frontend-svc
+            name: frontend-svcS
             port:
               number: 80
-      
----
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: api-gateway-ingress
-  namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths: 
       - path: /api(/|$)(.*)
         pathType: Prefix
         backend:
@@ -41,22 +26,7 @@ spec:
             name: api-gateway-svc
             port:
               number: 8080
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: feedback-api-ingress
-  namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths: 
+              
       - path: /admin(/|$)(.*)
         pathType: Prefix
         backend:
